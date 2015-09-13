@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import TemplateResponseMixin
 from socialregistration import signals
 from socialregistration.settings import SESSION_KEY
-import urlparse
+import urllib
 
 ERROR_VIEW = getattr(settings, 'SOCIALREGISTRATION_ERROR_VIEW_FUNCTION',
     None)
@@ -42,7 +42,7 @@ class CommonMixin(TemplateResponseMixin):
         else:
             next = getattr(settings, 'LOGIN_REDIRECT_URL', '/')
         
-        netloc = urlparse.urlparse(next)[1]
+        netloc = urllib.parse.urlparse(next)[1]
         
         if netloc and netloc != request.get_host():
             next = getattr(settings, 'LOGIN_REDIRECT_URL', '/')

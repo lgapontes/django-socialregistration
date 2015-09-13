@@ -4,7 +4,7 @@ from openid.consumer import consumer
 from socialregistration.clients import Client
 from socialregistration.contrib.openid.storage import OpenIDStore
 from socialregistration.settings import SESSION_KEY
-import urlparse
+import urllib
 
 class OpenIDClient(Client):
     def __init__(self, session_data, endpoint_url):
@@ -18,7 +18,7 @@ class OpenIDClient(Client):
         return 'http://%s/' % Site.objects.get_current().domain
     
     def get_callback_url(self, **kwargs):
-        return urlparse.urljoin(self.get_realm(),
+        return urllib.parse.urljoin(self.get_realm(),
             reverse('socialregistration:openid:callback'))
     
     def get_redirect_url(self):
@@ -30,7 +30,7 @@ class OpenIDClient(Client):
         return redirect_url
     
     def complete(self, GET, path):
-        self.result = self.consumer.complete(GET, urlparse.urljoin(self.get_realm(),
+        self.result = self.consumer.complete(GET, urllib.parse.urljoin(self.get_realm(),
             path))
     
     def is_valid(self):

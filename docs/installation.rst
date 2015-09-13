@@ -5,7 +5,7 @@ Requirements
 ============
 
 -  `oauth2 <http://pypi.python.org/pypi/oauth2/>`_
--  `python-openid <http://pypi.python.org/pypi/python-openid>`_
+-  `python3-openid <https://pypi.python.org/pypi/python3-openid/3.0.6>`_
 -  `facebook-python-sdk <https://github.com/facebook/python-sdk>`_
 
 .. note::

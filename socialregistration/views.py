@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import View, TemplateView
-from socialregistration.clients.oauth import OAuthError
 from socialregistration.contrib.openid.client import OpenIDClient
 from socialregistration.mixins import SocialRegistration
 
@@ -211,7 +210,7 @@ class OAuthRedirect(SocialRegistration, View):
         logger.debug("Redirecting to %s", url)
         try:
             return HttpResponseRedirect(url)
-        except OAuthError, error:
+        except error:
             return self.error_to_response(request, {'error': error})
         except socket.timeout:
             return self.error_to_response(request, {'error': 
@@ -258,7 +257,7 @@ class OAuthCallback(SocialRegistration, View):
             return HttpResponseRedirect(self.get_redirect())
         except KeyError:
             return self.error_to_response(request, {'error': "Session expired."})
-        except OAuthError, error:
+        except error:
             return self.error_to_response(request, {'error': error})
         except socket.timeout:
             return self.error_to_response(request, {'error':
